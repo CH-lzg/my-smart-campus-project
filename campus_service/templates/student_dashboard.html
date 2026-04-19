@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生中心 - 校园智慧服务与数据分析管理系统</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            background: #f5f7fa;
+        }
+
+        .sidebar {
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .sidebar-header {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-menu a.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .welcome-banner {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .welcome-banner h2 {
+            color: white;
+        }
+
+        .welcome-banner p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .stat-card {
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card.success {
+            border-left: 4px solid #667eea;
+        }
+
+        .stat-card.warning {
+            border-left: 4px solid #764ba2;
+        }
+
+        .quick-action-btn {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quick-action-btn:hover {
+            border-color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .quick-action-btn span {
+            font-size: 24px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .card {
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 20px 25px;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .table-container {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table thead {
+            background: #f8f9fa;
+        }
+
+        table th {
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .badge-success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .badge-danger {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .badge-warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .modal-overlay {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal {
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 25px;
+        }
+
+        .modal-close {
+            color: white;
+            font-size: 28px;
+        }
+
+        .modal-footer {
+            padding: 15px 25px;
+            background: #f8f9fa;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            padding: 10px 25px;
+            border-radius: 8px;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        .btn-secondary {
+            background: #e0e0e0;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 8px;
+            color: #333;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        .profile-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .profile-info h3 {
+            margin: 0 0 5px 0;
+            color: #333;
+        }
+
+        .profile-info p {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #667eea;
+        }
+
+        .course-card h4 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+
+        .course-info {
+            display: flex;
+            gap: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .course-info span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>📚 学生中心</h2>
+                <p>校园智慧服务系统</p>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="#" data-page="my-dashboard" class="active">
+                    <span>📊</span> 我的仪表盘
+                </a>
+                <a href="#" data-page="my-courses">
+                    <span>📚</span> 我的课程
+                </a>
+                <a href="#" data-page="my-scores">
+                    <span>📝</span> 我的成绩
+                </a>
+                <a href="#" data-page="my-profile">
+                    <span>👤</span> 个人信息
+                </a>
+                <a href="#" data-page="campus-services">
+                    <span>🏫</span> 校园服务
+                </a>
+                <a href="#" id="logout-btn" href="#">
+                    <span>🚪</span> 退出登录
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="content-header">
+                <div class="header-left">
+                    <h1 id="page-title">我的仪表盘</h1>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <div class="user-avatar" id="user-avatar">S</div>
+                        <span id="user-name">学生</span>
+                    </div>
+                </div>
+            </header>
+
+            <div id="main-content-area" class="content-area">
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/student_app.js') }}"></script>
+</body>
+
+</html>
