@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生中心 - 校园服务系统</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <h2>学生中心</h2>
+                <span>校园服务系统</span>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active" data-page="my-dashboard"><i class="fa fa-tachometer"></i>我的仪表盘</a></li>
+                <li><a href="#" data-page="my-courses"><i class="fa fa-book"></i>我的课程</a></li>
+                <li><a href="#" data-page="my-scores"><i class="fa fa-graduation-cap"></i>我的成绩</a></li>
+                <li><a href="#" data-page="my-profile"><i class="fa fa-cog"></i>个人信息</a></li>
+                <li><a href="#" data-page="campus-services"><i class="fa fa-building"></i>校园服务</a></li>
+                <li><a href="#" id="logout-btn"><i class="fa fa-sign-out"></i>退出登录</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="top-bar">
+                <h1 id="page-title">我的仪表盘</h1>
+                <div class="user-info">
+                    <span id="user-name">学生</span>
+                    <div class="user-avatar" id="user-avatar">S</div>
+                </div>
+            </div>
+
+            <div id="main-content-area">
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/student_app.js') }}"></script>
+</body>
+
+</html>

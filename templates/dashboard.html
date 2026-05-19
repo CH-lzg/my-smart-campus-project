@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校园服务管理系统</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <h2>校园服务</h2>
+                <span>管理系统</span>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active" data-page="dashboard"><i class="fa fa-tachometer"></i>仪表盘</a></li>
+                <li><a href="#" data-page="students"><i class="fa fa-user"></i>学生管理</a></li>
+                <li><a href="#" data-page="courses"><i class="fa fa-book"></i>课程管理</a></li>
+                <li><a href="#" data-page="scores"><i class="fa fa-graduation-cap"></i>成绩管理</a></li>
+                <li><a href="#" data-page="analytics"><i class="fa fa-bar-chart"></i>数据分析</a></li>
+                <li><a href="#" data-page="services"><i class="fa fa-building"></i>校园服务</a></li>
+                <li><a href="#" id="logout-btn"><i class="fa fa-sign-out"></i>退出登录</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="top-bar">
+                <h1 id="page-title">仪表盘</h1>
+                <div class="user-info">
+                    <span id="user-name">Admin</span>
+                    <div class="user-avatar" id="user-avatar">A</div>
+                </div>
+            </div>
+
+            <div id="main-content-area">
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+
+</html>
